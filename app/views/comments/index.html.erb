@@ -1,0 +1,34 @@
+<h2>Title: <%= @po.title %></h2>
+
+<p><%= @po.article %></p>
+
+
+<table class="table table-striped table-border">
+<thead class="thead">
+<h3><span>鄉民回覆 <%= @comments_count %></span></h3>
+</thead>
+<% @comments.each do |c| %>
+    </tr>
+      <td>
+        <%= c.user.try(:short_name) %>
+      </td>
+      <td>
+        <%= c.comment %>
+        <%= link_to "Delete", po_comment_path(@po, c), :method => :delete, :class => "btn btn-danger pull-right" %>
+      </td>
+    </tr>
+  <%end%>
+</table>
+
+<%= form_for @comment, :url => po_comments_path( :page => params[:page]) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :comment, "推" %>
+    <%= f.text_area :comment, :class => "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit :class => "btn btn-info" %>
+  </div>
+
+<%end%>
+<h4><%= paginate @comments %></h4>

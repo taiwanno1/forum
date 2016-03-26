@@ -1,0 +1,8 @@
+
+<div class="form-group">
+  <%= f.label :comment, "Comment" %>
+  <%= f.text_field :comment, :class => "form-control" %>
+</div>
+
+<%= f.submit "Save", :class => "btn btn-primary" %>
+<%= link_to "Cancel", events_path, :class => "btn btn-default" %>
