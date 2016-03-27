@@ -6,9 +6,6 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-
-  get "welcome/say_hello" => "welcome#say"
-  get "welcome" => "welcome#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

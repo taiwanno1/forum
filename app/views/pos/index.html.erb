@@ -3,6 +3,10 @@
 </div>
 
 <h2>Post List</h2>
+<%= link_to "sort by replied time", pos_path(:order => "@comments_sort"), :class => "btn btn-warning" %>
+<%= link_to "sort by comments count", pos_path(:order => "@comments.count"), :class => "btn btn-primary" %>
+<br/>
+
 <table class="table table-striped table-border">
 <!-- 文章分類 -->
   <% @cats.each do |c| %>
@@ -14,6 +18,9 @@
     <tr>
       <th>Topic </th>
       <th>User</th>
+      <th>Created Time</th>
+      <iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A6Q17V8p99onT23Cl2bbnku" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+      <th>Comments Count</th>
     </tr>
   </thead>
   <tbody>
@@ -24,9 +31,9 @@
           <%= check_box_tag "ids[]", p.id, false %>
           <%= link_to p.title, po_comments_path(p), :class => "btn btn-info" %>
         </th>
-        <td>
-          <%= p.user.try(:short_name) %>
-        </td>
+        <th><%= p.user.try(:short_name) %></th>
+        <th><%= p.updated_at %></th>
+        <th><%= p.comments.count %></th>
         <td class="clearfix">
           <%= link_to "Edit", pos_path( :po_id => p, :page => params[:page]), :class => "btn btn-info" if p.user == current_user %>
           <%= link_to "Delete", po_path( p,:po_id => p, :page => params[:page]), :method => :delete, :class => "btn btn-danger pull-right" if p.user == current_user%>

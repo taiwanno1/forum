@@ -3,8 +3,6 @@ class PosController < ApplicationController
   before_action :find_po, :only => [:show, :update, :destroy]
 
   def index
-    @pos = Po.all
-    @cats = Cat.all
 
     if params[:po_id]
       @po = Po.find(params[:po_id])
@@ -12,11 +10,10 @@ class PosController < ApplicationController
       @po = Po.new
     end
 
-    if params[:cat_id]
-      @pos = Cat.find(params[:cat_id]).pos
-    end
+    @comments = Comment.all
 
-    @pos = @pos.page(params[:page]).per(5)
+    prepare_variable_for_index_template
+
   end
 
   def create
@@ -28,7 +25,7 @@ class PosController < ApplicationController
     else
       flash[:notice] = "新增失敗"
     end
-    redirect_to pos_path
+    redirect_to pos_path(:page => params[:page])
   end
 
   def update
@@ -55,6 +52,26 @@ private
 
   def po_params
     params.require(:po).permit(:title, :article, :cat_ids => [])
+  end
+
+  def prepare_variable_for_index_template
+
+    @pos = Po.all
+    @cats = Cat.all
+
+
+
+    if params[:cat_id]
+      @pos = Cat.find(params[:cat_id]).pos
+    end
+
+    if params[:order]
+      @comments_sort = @comments.ids
+      sort_by = (params[:order] == '@comments_sort') ? '@comments_sort' : 'id'
+      @pos = @pos.order(sort_by)
+    end
+
+    @pos = @pos.page(params[:page]).per(5)
   end
 
 end
