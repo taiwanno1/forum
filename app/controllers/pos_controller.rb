@@ -4,6 +4,9 @@ class PosController < ApplicationController
 
   def index
 
+    @q = Po.ransack(params[:q])
+    @po = @q.result(distinct: true)
+
     if params[:po_id]
       @po = Po.find(params[:po_id])
     else
@@ -59,16 +62,16 @@ private
     @pos = Po.all
     @cats = Cat.all
 
-
-
     if params[:cat_id]
       @pos = Cat.find(params[:cat_id]).pos
     end
 
-    if params[:order]
-      @comments_sort = @comments.ids
-      sort_by = (params[:order] == '@comments_sort') ? '@comments_sort' : 'id'
-      @pos = @pos.order(sort_by)
+    if params[:order] == 'comments_count'
+      @pos = @pos.order('comments_count DESC')
+    elsif params[:order] == 'updated_at'
+      @pos = @pos.order('updated_at DESC')
+    else
+      @pos = @pos.order('id DESC')
     end
 
     @pos = @pos.page(params[:page]).per(5)

@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   validates_presence_of :comment
 
   belongs_to :user
-  belongs_to :po
+  belongs_to :po, :counter_cache => true
 
   after_commit :update_po_time
 
