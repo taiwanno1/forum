@@ -5,7 +5,6 @@
 <h2>Post List</h2>
 <%= link_to "sort by default", pos_path(:order => "id"), :class => "btn btn-info" %>
 <%= link_to "sort by reply time", pos_path(:order => "updated_at"), :class => "btn btn-primary" %>
-<%#= link_to "sort by default", pos_path(:order => "id"), :class => "btn btn-info" %>
 <%#= sort_link(@q, :id) %>
 <%= link_to "sort by comments count", pos_path(:order => "comments_count"), :class => "btn btn-warning" %>
 
@@ -22,8 +21,8 @@
     <tr>
       <th>Topic </th>
       <th>User</th>
-      <th>Created Time</th>
-      <th>Latest comment</th>
+      <th>Po Created Time</th>
+      <th>Latest Comment Time</th>
       <th>Comments Count</th>
     </tr>
   </thead>
@@ -36,21 +35,22 @@
           <%= link_to p.title, po_comments_path(p), :class => "btn btn-info" %>
         </th>
         <th><%= p.user.try(:short_name) %></th>
-        <th><%= p.created_at %></th>
-        <th><%= p.updated_at %></th>
+        <th><%= p.created_at.strftime('%c') %></th>
+        <th><%= p.updated_at.strftime('%c') %></th>
         <th><%= p.comments.count %></th>
-        <td class="clearfix">
+        <th class="clearfix">
           <%= link_to "Edit", pos_path( :po_id => p, :page => params[:page]), :class => "btn btn-info" if p.user == current_user %>
           <%= link_to "Delete", po_path( p,:po_id => p, :page => params[:page]), :method => :delete, :class => "btn btn-danger pull-right" if p.user == current_user%>
-        </td>
+        </th>
       </tr>
     <%end%>
   </tbody>
 </table>
 
-<iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A6Q17V8p99onT23Cl2bbnku" width="300" height="380" frameborder="0" allowtransparency="true" class="center-block"></iframe>
 <h2>wanna post?</h2>
 <%= form_for @po do |f| %>
 <%= render :partial => "form", :locals => {:f => f} %>
 <%= f.submit "save", :class => "btn btn-primary" %>
 <%end%>
+
+<iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A6Q17V8p99onT23Cl2bbnku" width="300" height="380" frameborder="0" allowtransparency="true" class="center-block"></iframe>

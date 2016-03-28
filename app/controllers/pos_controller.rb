@@ -32,12 +32,16 @@ class PosController < ApplicationController
   end
 
   def update
+    if params[:remove_logo] == "1"
+      @po.logo = nil
+    end
+
     if @po.update(po_params)
       flash[:notice] = "編輯成功"
     else
       flash[:notice] = "編輯gg"
     end
-    redirect_to po_path( :po_id => @po )
+    redirect_to pos_path(:page => params[:page])
   end
 
   def destroy
@@ -54,7 +58,7 @@ private
   end
 
   def po_params
-    params.require(:po).permit(:title, :article, :cat_ids => [])
+    params.require(:po).permit(:title, :logo, :article, :cat_ids => [])
   end
 
   def prepare_variable_for_index_template
