@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160328073235) do
+ActiveRecord::Schema.define(version: 20160328175458) do
 
   create_table "cats", force: :cascade do |t|
     t.string   "name"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(version: 20160328073235) do
 
   add_index "pos", ["user_id"], name: "index_pos_on_user_id"
 
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.text     "about"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -73,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160328073235) do
     t.datetime "updated_at",                          null: false
     t.string   "user_name"
     t.text     "about_user"
+    t.integer  "profile_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

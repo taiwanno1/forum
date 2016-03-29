@@ -34,7 +34,7 @@
           <%= check_box_tag "ids[]", p.id, false %>
           <%= link_to p.title, po_comments_path(p), :class => "btn btn-info" %>
         </th>
-        <th><%= p.user.try(:short_name) %></th>
+        <th><%= link_to p.user.try(:short_name), user_path(p.user) %></th>
         <th><%= p.created_at.strftime('%c') %></th>
         <th><%= p.updated_at.strftime('%c') %></th>
         <th><%= p.comments.count %></th>

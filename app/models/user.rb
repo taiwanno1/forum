@@ -6,8 +6,10 @@ class User < ActiveRecord::Base
 
   has_many :pos
   has_many :comments
+  has_one :profile
 
   def short_name
       self.email.split("@").first
   end
+
 end

@@ -19,6 +19,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "devise"
 gem "paperclip"
 gem 'ransack'
+gem 'omniauth-facebook'
 
 
 # Use jquery as the JavaScript library

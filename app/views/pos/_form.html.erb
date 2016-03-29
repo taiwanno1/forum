@@ -13,7 +13,7 @@
 <div class="form-group">
   <%= f.file_field :logo %>
 
-  <% if @po.logo.exitsts? %>
+  <% if @po.logo.exists? %>
     <%= check_box_tag "remove_logo", "1" %> Remove Logo
   <% end %>
 </div>

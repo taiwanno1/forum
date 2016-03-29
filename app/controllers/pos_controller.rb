@@ -23,6 +23,7 @@ class PosController < ApplicationController
     @po = Po.new (po_params)
     @po.user = current_user
     @cats = Cat.all
+
     if @po.save
       flash[:notice] = "新增成功"
     else

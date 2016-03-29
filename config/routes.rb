@@ -3,8 +3,11 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :pos do
-
     resources :comments
+  end
+
+  resources :users do
+    resources :profiles, :controller => :'user_profiles'
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
