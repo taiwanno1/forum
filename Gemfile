@@ -17,9 +17,10 @@ gem 'coffee-rails', '~> 4.1.0'
 gem "kaminari"
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "devise"
-gem "paperclip"
-gem 'ransack'
-gem 'omniauth-facebook'
+gem "paperclip"#檔案上傳
+gem 'ransack'#poor man serach
+gem 'omniauth-facebook'#fb sing in
+gem 'rest-client'#API
 
 
 # Use jquery as the JavaScript library
@@ -43,6 +44,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+
+  gem 'faker'
 end
 
 group :development do

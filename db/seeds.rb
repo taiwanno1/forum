@@ -5,4 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-  categories = Cat.create([{:name => "test1"}, {:name => "test2"}])
+Cat.create( :name => "都被你看透惹" )
+Cat.create( :name => "你這樣你媽知道嗎" )
+Cat.create( :name => "早安您好，平安喜樂" )
+

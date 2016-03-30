@@ -21,7 +21,7 @@ class PosController < ApplicationController
 
   def create
     @po = Po.new (po_params)
-    @po.user = current_user
+    @po.user = current_user # @po.user_id = current_user.id
     @cats = Cat.all
 
     if @po.save

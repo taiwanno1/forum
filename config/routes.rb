@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
+  resources :users, only: [:show]
+
+  get "/ubike" => "welcome#ubike"
 
   resources :pos do
     resources :comments
@@ -9,6 +13,8 @@ Rails.application.routes.draw do
   resources :users do
     resources :profiles, :controller => :'user_profiles'
   end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
