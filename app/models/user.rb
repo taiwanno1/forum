@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
   has_many :pos
   has_many :comments
+
+  has_many :likes
+  has_many :like_pos, :through => :likes, :source => :po
+
   has_one :profile
 
   def short_name

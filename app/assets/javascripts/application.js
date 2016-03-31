@@ -15,7 +15,10 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require autosize.min
+//= require select2-full
 
 $(document).on("page:change", function(){
   autosize($('textarea'))
 });
+
+

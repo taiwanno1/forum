@@ -40,5 +40,5 @@
 <h2>wanna post?</h2>
 <%= form_for @po, :remote => true do |f| %>
 <%= render :partial => "form", :locals => {:f => f} %>
-<%= f.submit "save", :class => "btn btn-primary" %>
+<%= f.submit "save", :class => "btn btn-warning" %>
 <%end%>

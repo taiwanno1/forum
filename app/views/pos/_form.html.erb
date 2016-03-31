@@ -6,8 +6,8 @@
       </ul>
 <% end %>
 
-<div class="form-group">
-  <%= f.collection_check_boxes(:cat_ids, Cat.all, :id, :name) %>
+<div class="form-group" id="dropdown">
+  <%= f.collection_select :cat_ids, Cat.all, :id, :name, {}, :class => "form-control", :prompt => "Please select" %>
 </div>
 
 <div class="form-group">
@@ -27,3 +27,10 @@
   <%= f.label :article, "Article" %>
   <%= f.text_area :article, :class => "form-control" %>
 </div>
+
+<script>
+  $( "#dropdown" ).select2({
+    theme: "bootstrap"
+});
+</script>
+

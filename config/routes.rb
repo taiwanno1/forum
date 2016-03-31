@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :pos do
     resources :comments
+    resources :likes
   end
 
   resources :users do

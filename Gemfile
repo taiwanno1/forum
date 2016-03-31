@@ -21,7 +21,7 @@ gem "paperclip"#檔案上傳
 gem 'ransack'#poor man serach
 gem 'omniauth-facebook'#fb sing in
 gem 'rest-client'#API
-
+gem "select2-rails"#awesome select
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
