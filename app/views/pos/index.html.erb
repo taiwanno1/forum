@@ -26,31 +26,18 @@
       <th>Comments Count</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody id="pos-list">
   <!-- 文章 -->
     <% @pos.each do |p| %>
-      <tr>
-        <th>
-          <%= check_box_tag "ids[]", p.id, false %>
-          <%= link_to p.title, po_comments_path(p), :class => "btn btn-info" %>
-        </th>
-        <th><%= link_to p.user.try(:short_name), user_path(p.user) %></th>
-        <th><%= p.created_at.strftime('%c') %></th>
-        <th><%= p.updated_at.strftime('%c') %></th>
-        <th><%= p.comments.count %></th>
-        <th class="clearfix">
-          <%= link_to "Edit", pos_path( :po_id => p, :page => params[:page]), :class => "btn btn-info" if p.user == current_user %>
-          <%= link_to "Delete", po_path( p,:po_id => p, :page => params[:page]), :method => :delete, :class => "btn btn-danger pull-right" if p.user == current_user%>
-        </th>
-      </tr>
+      <%= render :partial => "po", :locals => { :p => p } %>
     <%end%>
   </tbody>
 </table>
 
 <h2>wanna post?</h2>
-<%= form_for @po do |f| %>
+<%= form_for @po, :remote => true do |f| %>
 <%= render :partial => "form", :locals => {:f => f} %>
-<%= f.submit "save", :class => "btn btn-primary" %>
+<%= f.submit "save", :remote => true, :class => "btn btn-primary" %>
 <%end%>
 
-<iframe src="https://embed.spotify.com/?uri=spotify%3Atrack%3A6Q17V8p99onT23Cl2bbnku" width="300" height="380" frameborder="0" allowtransparency="true" class="center-block"></iframe>
+<iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A6t1B1gR6GWFZSPqL3JvwYp" width="300" height="380" frameborder="0" allowtransparency="true" class="center-block"></iframe>

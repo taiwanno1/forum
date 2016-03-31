@@ -1,0 +1,10 @@
+<% if @po.valid? %>
+
+$("#pos-list").prepend("<%=j render( :partial => "po", :locals => { :p => @po }  ) %>");
+$("#new_po").trigger('reset');
+
+<% else %>
+
+alert("新增失敗!!!");
+
+<% end %>

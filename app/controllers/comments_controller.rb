@@ -14,17 +14,29 @@ class CommentsController < ApplicationController
     @comment = @po.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to po_comments_path(:page => params[:page])
+      flash[:notice] = "新增成功"
+      respond_to do |format|
+        format.html {redirect_to po_comments_path(:page => params[:page])}
+        format.js
+      end
     else
-      redirect_to  po_comments_path
+      flash[:notice] = "新增哭哭"
     end
+
+
+
   end
 
   def destroy
     flash[:alert] = "comment deleted"
     @comment = @po.comments.find(params[:id])
     @comment.destroy
-    redirect_to po_comments_path
+
+    respond_to do |format|
+      format.html {redirect_to po_comments_path}
+      format.js
+    end
+
   end
 
 

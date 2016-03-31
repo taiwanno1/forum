@@ -1,1 +1,3 @@
-<h1>this is profile</h1>
+<h1 class="text-center"><%= @user.try(:short_name) %>'s profile</h1>
+
+<%= @user.about_user %>

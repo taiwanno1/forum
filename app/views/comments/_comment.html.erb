@@ -1,0 +1,9 @@
+<tr>
+  <td id="comment-<%= c.id %>"><strong><%= c.user.try(:short_name) %>:  <%= c.comment %></strong>
+    <% if current_user && c.user == current_user %>
+
+      <%= link_to "Delete", po_comment_path(@po, c), :method => :delete, :class => "btn btn-danger pull-right", :remote => true %>
+
+    <% end %>
+  </td>
+</tr>

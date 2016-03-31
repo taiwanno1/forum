@@ -26,10 +26,16 @@ class PosController < ApplicationController
 
     if @po.save
       flash[:notice] = "新增成功"
+      respond_to do |format|
+        # format.html {redirect_to pos_path(:page => params[:page])}
+        format.js
+      end
     else
       flash[:notice] = "新增失敗"
     end
-    redirect_to pos_path(:page => params[:page])
+
+
+
   end
 
   def update
@@ -48,7 +54,11 @@ class PosController < ApplicationController
   def destroy
     flash[:alert] = "Po killed"
     @po.destroy
-    redirect_to pos_path(:page => params[:page])
+
+    respond_to do |format|
+      format.html {redirect_to pos_path(:page => params[:page])}
+      format.js
+    end
   end
 
 
