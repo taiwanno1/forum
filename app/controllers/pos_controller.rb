@@ -1,6 +1,6 @@
 class PosController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
-  before_action :find_po, :only => [:show, :update, :destroy]
+  before_action :find_po, :only => [:show, :update, :destroy,:subscribe, :unsubscribe]
 
   def index
 
@@ -61,6 +61,33 @@ class PosController < ApplicationController
     end
   end
 
+  def subscribe
+
+    subscription = @po.find_subscription_by(current_user)
+    if subscription
+      # do nothing
+    else
+      @subscription = @po.subscriptions.create!( :user => current_user )
+    end
+
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.js
+    end
+  end
+
+  def unsubscribe
+
+     subscription = @po.find_subscription_by(current_user)
+     subscription.destroy
+
+    respond_to do |format|
+      format.html {redirect_to :back}
+      format.js
+    end
+  end
+
+-------------------------------------------------------
 
 private
 
@@ -69,7 +96,8 @@ private
   end
 
   def po_params
-    params.require(:po).permit(:title, :logo, :article, :cat_ids => [])
+    params.require(:po).permit(:title, :logo, :article,
+                               :start_on, :cat_ids => [])
   end
 
   def prepare_variable_for_index_template

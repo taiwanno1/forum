@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   resources :pos do
     resources :comments
     resources :likes
+
+    member do
+      post :subscribe
+      post :unsubscribe
+    end
   end
 
   resources :users do

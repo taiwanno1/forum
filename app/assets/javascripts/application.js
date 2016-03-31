@@ -16,9 +16,11 @@
 //= require bootstrap-sprockets
 //= require autosize.min
 //= require select2-full
+//= require bootstrap-datepicker
+
+
+
 
 $(document).on("page:change", function(){
   autosize($('textarea'))
 });
-
-

@@ -1,5 +1,5 @@
 h1 {
-  background-color: yellow;
+
 }
 
 .head {
@@ -7,9 +7,17 @@ h1 {
   background-size: contain;
 }
 
-footer, body{
+footer{
   margin: 0 auto;
   background-image: image-url("cat.png");
   -webkit-background-size: contain;
   background-size: contain;
+}
+
+.po_list {
+  color: yellow;
+}
+
+body {
+  font-family: 'Lobster', cursive;
 }
