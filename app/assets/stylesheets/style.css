@@ -1,3 +1,15 @@
 h1 {
   background-color: yellow;
 }
+
+.head {
+  background-image: image-url("catroll.png");
+  background-size: contain;
+}
+
+footer, body{
+  margin: 0 auto;
+  background-image: image-url("cat.png");
+  -webkit-background-size: contain;
+  background-size: contain;
+}
