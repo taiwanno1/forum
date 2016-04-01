@@ -23,24 +23,27 @@
             <%= flash[:alert] %>
           </div>
         <% end %>
-        hi <%= current_user.try(:short_name) %>
+        <header>
+          hi <%= current_user.try(:short_name) %>
 
-        <%= link_to "Ubike", ubike_path %>
+          <%= link_to "Ubike", ubike_path %>
 
-        <% if current_user %>
-            <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-            <%= link_to('profile', edit_registration_path(:user)) %>
-        <% else %>
-            <%= link_to('註冊', new_registration_path(:user)) %> |
-            <%= link_to('登入', new_session_path(:user)) %>
-        <% end %>
-        <% if current_user %>
-          <%= link_to('登出', destroy_user_session_path, :method => :delete, :class => "btn btn-warning btn-xs") %>
+          <% if current_user %>
+              <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+              <%= link_to('profile', edit_registration_path(:user)) %>
           <% else %>
-              <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-info btn-xs" %>
-        <% end %>
-        <br/>
-        <%= link_to "Home", pos_path, :class => "btn btn-info btn-lg center-block" %>
+              <%= link_to('註冊', new_registration_path(:user)) %> |
+              <%= link_to('登入', new_session_path(:user)) %>
+          <% end %>
+          <% if current_user %>
+            <%= link_to('登出', destroy_user_session_path, :method => :delete, :class => "btn btn-warning btn-xs") %>
+            <% else %>
+                <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-info btn-xs" %>
+          <% end %>
+          <br/>
+          <%= link_to "Home", pos_path, :class => "btn btn-info btn-lg center-block" %>
+        </header>
+
         <%= yield %>
       </div>
     </div>

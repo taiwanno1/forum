@@ -23,7 +23,7 @@ gem 'omniauth-facebook'#fb sing in
 gem 'rest-client'#API
 gem "select2-rails"#awesome select
 gem 'bootstrap-datepicker-rails'#pretty Date Time
-
+gem 'rails-i18n'
 
 
 # Use jquery as the JavaScript library
