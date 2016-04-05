@@ -4,7 +4,7 @@
   <h3>
     <% if @profile.about %>
       About Me:
-      <%= @profile.about %>
+      <p class="about-text"><%= @profile.about %></p>
     <% else %>
       About Me:
       <%= form_for [@user, @profile] do |f| %>
@@ -15,6 +15,13 @@
       <% end %>
     <% end %>
   </h3>
+  <h3>我好棒棒了哪些文章：</h3>
+  <% user_like = Po.where(:id => @likes.pluck(:po_id)) %>
+  <ul>
+    <% user_like.each do |u| %>
+      <li><%= u.title %></li>
+    <% end %>
+  </ul>
   <%= link_to 'Edit Your Profile', edit_user_profile_path(current_user, :id) %>
 </div>
 

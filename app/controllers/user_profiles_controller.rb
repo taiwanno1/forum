@@ -4,10 +4,12 @@ class UserProfilesController < ApplicationController
 
   def index
     @profile = @user.profile
+    @likes = @user.likes
   end
 
   def show
     @profile = @user.profile
+    @likes = @user.likes
   end
 
   def new

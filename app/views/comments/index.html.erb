@@ -19,6 +19,15 @@
 <div id="like-area">
   <%= render :partial => "like", :locals => {:like => like} %>
 </div>
+  <% user_like = User.where(:id => @likes.pluck(:user_id)) %>
+   <p>
+    <% user_like.each do |u| %>
+      <%= u.short_name %>
+    <% end %>
+    覺得這篇好棒棒
+  </p>
+
+
 <!-- ------------------subscribe-------------------- -->
 <% subscription = @po.find_subscription_by(current_user) %>
 <div id="subscription-area">

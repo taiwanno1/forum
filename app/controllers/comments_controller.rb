@@ -7,6 +7,8 @@ class CommentsController < ApplicationController
     @comment = @po.comments.new
     @comments = @comments.page(params[:page]).per(5)
     @comments_count = @po.comments.count
+    @likes = @po.likes
+
   end
 
   def create

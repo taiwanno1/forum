@@ -1,5 +1,16 @@
 <div id="profile">
+
   <h1 class="text-center"><%= @user.try(:short_name) %>'s profile</h1>
 
-  <h2 class="text-center">About <%= @user.short_name %>: <%= @profile.about %></h2>
+  <h3>About <%= @user.short_name %>:</h3>
+  <p class="about-text"><%= @profile.about %></p>
+
+  <h3><%= @user.short_name %> 好棒棒了哪些文章：</h3>
+  <% user_like = Po.where(:id => @likes.pluck(:po_id)) %>
+  <ul>
+    <% user_like.each do |u| %>
+      <li><%= u.title %></li>
+    <% end %>
+  </ul>
+
 </div>
