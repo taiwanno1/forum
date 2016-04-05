@@ -2,6 +2,10 @@ class UserProfilesController < ApplicationController
 
   before_action :find_user
 
+  def index
+    @profile = @user.profile
+  end
+
   def show
     @profile = @user.profile
   end
@@ -13,7 +17,7 @@ class UserProfilesController < ApplicationController
   def create
     @profile = @user.build_profile( profile_params )
     if @profile.save
-      redirect_to user_profile_url( @user )
+      render :action => :show
     else
       render :action => :new
     end
@@ -21,15 +25,21 @@ class UserProfilesController < ApplicationController
 
   def edit
     @profile = @user.profile
+    if @user.profile
+      @user.profile
+    else
+      @user.get_profile
+    end
+
   end
 
   def update
     @profile = @user.profile
 
     if @profile.update( profile_params )
-      redirect_to user_profile_url( @user )
+      render :action => :show
     else
-      render :action => :edit
+      redirect_to back
     end
 
   end
@@ -41,14 +51,14 @@ class UserProfilesController < ApplicationController
     redirect_to user_profile_url( @user )
   end
 
-  protected
+protected
 
   def find_user
     @user = User.find( params[:user_id] )
   end
 
   def profile_params
-    params.require(:profile).permit(:name)
+    params.require(:profile).permit(:name, :about)
   end
 
 end

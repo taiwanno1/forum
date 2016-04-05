@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :find_po
 
   def index
-    @comments = @po.comments
+    @comments = @po.comments.order("id DESC")
     @comment = @po.comments.new
     @comments = @comments.page(params[:page]).per(5)
     @comments_count = @po.comments.count
@@ -14,6 +14,14 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       flash[:notice] = "新增成功"
+
+      all_users = @po.comments.map{|c| c.user}
+      all_users << @po.user
+      all_users = all_users.uniq
+      all_users.each do |u|
+        UserMailer.notify_comment(@po, @comment, u).deliver_later
+      end
+
       respond_to do |format|
         format.html {redirect_to po_comments_path(:page => params[:page])}
         format.js
@@ -21,9 +29,6 @@ class CommentsController < ApplicationController
     else
       flash[:notice] = "新增哭哭"
     end
-
-
-
   end
 
   def destroy
@@ -35,9 +40,7 @@ class CommentsController < ApplicationController
       format.html {redirect_to po_comments_path}
       format.js
     end
-
   end
-
 
 
 private
@@ -47,7 +50,7 @@ private
   end
 
   def comment_params
-    params.require(:comment).permit(:name, :comment)
+    params.require(:comment).permit(:name, :comment, :cat_ids => [])
   end
 
 end

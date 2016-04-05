@@ -23,7 +23,8 @@ gem 'omniauth-facebook'#fb sing in
 gem 'rest-client'#API
 gem "select2-rails"#awesome select
 gem 'bootstrap-datepicker-rails'#pretty Date Time
-gem 'rails-i18n'
+gem 'rails-i18n'#多國語系
+gem "letter_opener", :group => :development
 
 
 # Use jquery as the JavaScript library

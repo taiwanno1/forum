@@ -11,10 +11,10 @@ namespace :dev do
 
     user = User.create!( :email => "hugo@hotmail.com", :password => "12345678")
 
-    20.times do |i|
+    10.times do |i|
       p = Po.create( :title => Faker::App.name, :user => user ) # :user_id => user.id
       10.times do |j|
-        p.comments.create( :comment => Faker::Lorem.sentences(1, true) )
+        p.comments.create( :comment => Faker::Lorem.sentences(1, true), :user => user )
       end
     end
   end

@@ -1,6 +1,6 @@
 <h2><%= @po.likes.count %></h2>
 <% if like %>
-  <%= link_to "魯蛇", po_like_path(@po, like), :remote => true, :method => :delete, :class => "btn btn-warning btn-xs" %>
+  <%= link_to "魯蛇", po_like_path(@po, like), :remote => true, :method => :delete, :class => "btn btn-warning btn-sm" %>
 <% else %>
-  <%= link_to "阿不就好棒棒", po_likes_path(@po), :remote => true, :method => :post, :class => "btn btn-info btn-xs" %>
+  <%= link_to "阿不就好棒棒", po_likes_path(@po), :remote => true, :method => :post, :class => "btn btn-info btn-sm" %>
 <% end %>

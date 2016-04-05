@@ -4,20 +4,19 @@
 
 <div class="head">
   <h2 class="po_list">Post List</h2>
+  <%= image_tag("what.png") %>
+  <br/>
+  <!-- ---------------排序----------------- -->
   <%= link_to "sort by default", pos_path(:order => "id"), :class => "btn btn-info" %>
   <%= link_to "sort by reply time", pos_path(:order => "updated_at"), :class => "btn btn-primary" %>
-  <%#= sort_link(@q, :id) %>
   <%= link_to "sort by comments count", pos_path(:order => "comments_count"), :class => "btn btn-warning" %>
-
-  <br/>
-  <%= image_tag("what.png") %>
-</div>
-
-<table class="table table-striped table-border">
-<!-- 文章分類 -->
-  <% @cats.each do |c| %>
-    <%= link_to c.name, pos_path(:cat_id => c), :class => "btn btn-default" %>
+  <!-- ---------------文章分類----------------- -->
+<% @cats.each do |c| %>
+    <%= link_to c.name, pos_path(:cat_id => c, :page => params[:page]), :class => "btn btn-default" %>
   <%end%>
+</div>
+<!-- ---------------文章顯示table----------------- -->
+<table class="table table-border" id="table">
 
   <thead class="thead">
     <%= paginate @pos %>
@@ -36,9 +35,9 @@
     <%end%>
   </tbody>
 </table>
-
+<!-- ---------------文章新增＆修改----------------- -->
 <h2>wanna post?</h2>
 <%= form_for @po, :remote => true do |f| %>
-<%= render :partial => "form", :locals => {:f => f} %>
-<%= f.submit "save", :class => "btn btn-warning" %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+  <%= f.submit "save", :class => "btn btn-warning" %>
 <%end%>

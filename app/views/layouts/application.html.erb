@@ -7,11 +7,12 @@
   <%= csrf_meta_tags %>
   <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700|Lobster' rel='stylesheet' type='text/css'>
 </head>
-<body>
-
+<body class="clearfix">
+<%= link_to "Home", pos_path, :class => "btn btn-info btn-lg home-btn" %>
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+
         <% if flash[:notice].present? %>
         <div class="alert alert-success" role="alert">
           <%= flash[:notice] %>
@@ -23,14 +24,16 @@
             <%= flash[:alert] %>
           </div>
         <% end %>
+
         <header>
           hi <%= current_user.try(:short_name) %>
 
-          <%= link_to "Ubike", ubike_path %>
+          <%= link_to "Ubike", ubike_path %>|
 
           <% if current_user %>
-              <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
-              <%= link_to('profile', edit_registration_path(:user)) %>
+              <%= link_to(t(:logout), destroy_user_session_path, :method => :delete) %> |
+              <%= link_to(t(:change_password), edit_registration_path(:user)) %> |
+              <%= link_to('edit_profile', user_profile_path(current_user, :id)) %>
           <% else %>
               <%= link_to('註冊', new_registration_path(:user)) %> |
               <%= link_to('登入', new_session_path(:user)) %>
@@ -41,15 +44,25 @@
                 <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-info btn-xs" %>
           <% end %>
           <br/>
-          <%= link_to "Home", pos_path, :class => "btn btn-info btn-lg center-block" %>
+          <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
+          <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
         </header>
 
         <%= yield %>
+
       </div>
     </div>
   </div>
+<script>
+$(document).ready(function () {
+    $(".js-example-basic-single").select2();
+  });
+</script>
 </body>
+
 <footer>
-  <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A6t1B1gR6GWFZSPqL3JvwYp" width="300" height="380" frameborder="0" allowtransparency="true" class="center-block"></iframe>
+  <iframe src="https://embed.spotify.com/?uri=spotify%3Auser%3Aspotify%3Aplaylist%3A6t1B1gR6GWFZSPqL3JvwYp" width="300" height="380" frameborder="0" allowtransparency="true" class="center-block">
+  </iframe>
 </footer>
+
 </html>

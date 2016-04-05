@@ -1,7 +1,3 @@
-h1 {
-
-}
-
 .head {
   background-image: image-url("catroll.png");
   background-size: contain;
@@ -9,6 +5,10 @@ h1 {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   /*background-attachment: fixed;*/
+}
+
+.page-header {
+  color: orange;
 }
 
 footer{
@@ -24,9 +24,58 @@ footer{
 
 body {
   font-family: 'Lobster', cursive;
+  background-color: #000;
+  color: #777777;
+  letter-spacing: 2px;
+}
+
+body h1, h2, h3 {
+  color: orange;
+}
+
+body p {
+  color: #fff;
+  font-size: 1.5em;
+}
+
+#table thead th {
+  color: #fff;
+}
+
+.home-btn {
+  position: fixed;
+  width: 80px;
+  display: block;
+  background-color: #000;
 }
 
 header {
-  position: fixed;
+/*  position: fixed;*/
+
 }
+
+.select {
+  width: 1140px;
+  background-color: #777777;
+}
+
+.calander {
+  color: #777777;
+}
+
+.profile h2 {
+  width: 400px;
+}
+
+.about {
+  width: 400px;
+  display: block;
+  color: black;
+}
+
+#profile {
+  color: #fff;
+}
+
+
 

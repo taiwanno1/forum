@@ -1,0 +1,5 @@
+<div id="profile">
+  <h1 class="text-center"><%= @user.try(:short_name) %>'s profile</h1>
+
+  <h2 class="text-center">About <%= @user.short_name %>: <%= @profile.about %></h2>
+</div>

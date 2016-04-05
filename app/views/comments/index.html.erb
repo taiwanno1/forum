@@ -1,4 +1,12 @@
 <h2>Title: <%= @po.title %></h2>
+
+<h3>
+  Category:
+    <% @po.cats.each do |c| %>
+      <%= c.name %>
+    <% end %>
+</h3>
+
 <% if @po.logo.exists? %>
   <%= image_tag(@po.logo.url(:medium))%>
 <% else %>
@@ -6,30 +14,29 @@
 <% end %>
 <p><%= @po.article %></p>
 
-<!-- like -->
+<!-- ------------------like-------------------- -->
 <% like = @po.find_like_by(current_user) %>
 <div id="like-area">
   <%= render :partial => "like", :locals => {:like => like} %>
 </div>
-
+<!-- ------------------subscribe-------------------- -->
 <% subscription = @po.find_subscription_by(current_user) %>
-<% if subscription %>
-  <%= link_to "Unsubscribe", unsubscribe_po_path(@po), :method => :post, :class => "btn btn-warning btn-sm" %>
-<% else %>
-  <%= link_to "Subscribe", subscribe_po_path(@po), :method => :post, :class => "btn btn-primary btn-sm" %>
-<% end %>
+<div id="subscription-area">
+  <%= render :partial => "subscription", :locals => {:subscription => subscription}%>
+</div>
 
-<table class="table table-striped table-border">
+<!-- ------------------推文顯示-------------------- -->
+<table class="table table-border" id="table">
   <thead class="thead">
     <h3><span>鄉民回覆 <%= @comments_count %></span></h3>
   </thead>
   <tbody id="comments-list">
     <% @comments.each do |c| %>
-      <%= render :partial => "comment", :locals => { :c => c } %>
+      <%= render :partial => "comment", :locals => { :c => c} %>
     <%end%>
   </tbody>
 </table>
-
+<!-- ------------------推文輸入-------------------- -->
 <%= form_for @comment, :remote => true, :url => po_comments_path( :page => params[:page]) do |f|  %>
 
   <div class="form-group">

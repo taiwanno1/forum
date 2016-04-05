@@ -1,11 +1,8 @@
 class PosController < ApplicationController
   before_action :authenticate_user!, :except => [:index]
-  before_action :find_po, :only => [:show, :update, :destroy,:subscribe, :unsubscribe]
+  before_action :find_po, :only => [:show, :update, :destroy, :subscribe, :unsubscribe]
 
   def index
-
-    @q = Po.ransack(params[:q])
-    @po = @q.result(distinct: true)
 
     if params[:po_id]
       @po = Po.find(params[:po_id])
@@ -13,7 +10,7 @@ class PosController < ApplicationController
       @po = Po.new
     end
 
-    @comments = Comment.all
+    # @comments = Comment.all
 
     prepare_variable_for_index_template
 
@@ -33,7 +30,6 @@ class PosController < ApplicationController
     else
       flash[:notice] = "新增失敗"
     end
-
 
 
   end
@@ -56,47 +52,46 @@ class PosController < ApplicationController
     @po.destroy
 
     respond_to do |format|
-      format.html {redirect_to pos_path(:page => params[:page])}
+      format.html { redirect_to pos_path(:page => params[:page]) }
       format.js
     end
   end
 
   def subscribe
-
     subscription = @po.find_subscription_by(current_user)
     if subscription
       # do nothing
     else
-      @subscription = @po.subscriptions.create!( :user => current_user )
+      @subscription = @po.subscriptions.create!(:user => current_user)
     end
 
     respond_to do |format|
-      format.html {redirect_to :back}
-      format.js
+      format.html { redirect_to :back }
+      format.js {render "subscription"}
     end
   end
 
   def unsubscribe
-
-     subscription = @po.find_subscription_by(current_user)
-     subscription.destroy
+    @subscription = @po.find_subscription_by(current_user)
+    @subscription.destroy
+    @subscription = nil
 
     respond_to do |format|
-      format.html {redirect_to :back}
-      format.js
+      format.html { redirect_to :back }
+      format.js {render "subscription"}
     end
   end
 
 # ----------------------------------------------------
 
-private
+  private
 
   def find_po
     @po = Po.find(params[:id])
   end
 
   def po_params
-    params.require(:po).permit(:title, :logo, :article,
+    params.require(:po).permit(:title, :logo, :article, :cat_id,
                                :start_on, :cat_ids => [])
   end
 

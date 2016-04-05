@@ -1,4 +1,22 @@
-<h1>really!?</h1>
-<% @pos.each do |p| %>
+<div id="profile">
+  <h1 class="text-center">Bonjour <%= @user.short_name%>!</h1>
 
-<% end %>
+  <h3>
+    <% if @profile.about %>
+      About Me:
+      <%= @profile.about %>
+    <% else %>
+      About Me:
+      <%= form_for [@user, @profile] do |f| %>
+        <div class="form-group">
+          <%= f.text_area :about, :class => "about" %>
+          <%= f.submit 'save', :class => "btn text-left" %>
+        </div>
+      <% end %>
+    <% end %>
+  </h3>
+  <%= link_to 'Edit Your Profile', edit_user_profile_path(current_user, :id) %>
+</div>
+
+
+

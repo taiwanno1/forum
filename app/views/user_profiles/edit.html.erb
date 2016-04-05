@@ -1,4 +1,11 @@
-<h1>...</h1>
+<div id="profile">
+  <h1 class="text-center">My Profile</h1>
 
-
-<%= @profile %>
+  <h3>About Me</h3>
+  <%= form_for [@user, @profile] do |f| %>
+    <div class="form-group">
+      <%= f.text_area :about, :class => "about" %>
+      <%= f.submit 'save', :class => "btn text-left" %>
+    </div>
+  <% end %>
+</div>

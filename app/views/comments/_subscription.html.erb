@@ -1,0 +1,7 @@
+<% if subscription %>
+  <%= link_to "Unsubscribe", unsubscribe_po_path(@po),
+  :remote => true, :method => :post, :class => "btn btn-warning btn-sm" %>
+<% else %>
+  <%= link_to "Subscribe", subscribe_po_path(@po),
+  :remote => true, :method => :post, :class => "btn btn-primary btn-sm" %>
+<% end %>

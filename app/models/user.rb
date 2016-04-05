@@ -54,6 +54,15 @@ class User < ActiveRecord::Base
      #user.fb_raw_data = auth
      user.save!
      return user
-   end
+  end
+
+  def get_profile
+    if self.profile
+      self.profile
+    else
+      self.create_profile
+    end
+  end
+
 
 end
