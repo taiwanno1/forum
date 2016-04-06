@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160401032050) do
+ActiveRecord::Schema.define(version: 20160406122316) do
 
   create_table "cats", force: :cascade do |t|
     t.string   "name"
@@ -32,6 +32,20 @@ ActiveRecord::Schema.define(version: 20160401032050) do
   create_table "event_cats", force: :cascade do |t|
     t.integer  "po_id"
     t.integer  "cat_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friendship_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,8 +84,12 @@ ActiveRecord::Schema.define(version: 20160401032050) do
     t.string   "name"
     t.integer  "user_id"
     t.text     "about"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "pic_file_name"
+    t.string   "pic_content_type"
+    t.integer  "pic_file_size"
+    t.datetime "pic_updated_at"
   end
 
   create_table "subscriptions", force: :cascade do |t|

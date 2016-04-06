@@ -1,5 +1,12 @@
+<!-- ------------------自己的-------------------- -->
 <div id="profile">
   <h1 class="text-center">Bonjour <%= @user.short_name%>!</h1>
+
+  <% if @profile.pic.exists? %>
+    <%= image_tag(@profile.pic.url(:medium))%>
+  <% else %>
+    you can upload picture
+  <% end %>
 
   <h3>
     <% if @profile.about %>

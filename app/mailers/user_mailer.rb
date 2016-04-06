@@ -10,6 +10,7 @@ class UserMailer < ApplicationMailer
     @po = po
     @comment = @po.comments
 
-    mail to: user.email, :subject =>  "new post wanna check?"
+    # mail to: user.email, :subject =>  "new post wanna check?"
+    #先關掉＝＝
   end
 end

@@ -5,7 +5,15 @@
   <%= form_for [@user, @profile] do |f| %>
     <div class="form-group">
       <%= f.text_area :about, :class => "about" %>
-      <%= f.submit 'save', :class => "btn text-left" %>
     </div>
+    <div class="form-group">
+      <%= f.file_field :pic %>
+
+      <% if @profile.pic.exists? %>
+        <%= check_box_tag "remove_pic", "1" %> Remove pic
+      <% end %>
+    </div>
+    <%= f.submit 'save', :class => "btn text-left" %>
   <% end %>
+
 </div>

@@ -46,7 +46,7 @@
   </tbody>
 </table>
 <!-- ------------------推文輸入-------------------- -->
-<%= form_for @comment, :remote => true, :url => po_comments_path( :page => params[:page]) do |f|  %>
+<%= form_for @comment, :remote => true, :url => po_comments_path(:page => params[:page]) do |f|  %>
 
   <div class="form-group">
     <%= f.label :comment, "講話啊" %>

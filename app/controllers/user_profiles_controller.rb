@@ -60,7 +60,7 @@ protected
   end
 
   def profile_params
-    params.require(:profile).permit(:name, :about)
+    params.require(:profile).permit(:name, :about, :pic)
   end
 
 end

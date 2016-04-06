@@ -14,6 +14,9 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :subscribed_pos, :through => :likes,  :source => :pos
 
+  has_many :friends, :through => :friendships
+  has_many :friendships
+
   has_one :profile
 
   def short_name

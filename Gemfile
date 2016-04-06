@@ -24,7 +24,8 @@ gem 'rest-client'#API
 gem "select2-rails"#awesome select
 gem 'bootstrap-datepicker-rails'#pretty Date Time
 gem 'rails-i18n'#多國語系
-gem "letter_opener", :group => :development
+gem "letter_opener", :group => :development #mail
+gem 'remotipart', '~> 1.2' #ajax 上傳檔案
 
 
 # Use jquery as the JavaScript library

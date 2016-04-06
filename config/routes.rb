@@ -16,9 +16,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users do
-    resources :profiles, :controller => :'user_profiles'
+  resources :users, except: [:show] do
+    # collection do
+    #   get '/:name/profiles' => 'user_profiles#index'
+    # end
+     resources :profiles, :controller => :'user_profiles'
   end
+
 
 
 
