@@ -14,8 +14,20 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :subscribed_pos, :through => :likes,  :source => :pos
 
-  has_many :friends, :through => :friendships
+# I add friend
   has_many :friendships
+  has_many :friends, :through => :friendships # friendships的friend_id就是user's friend
+  #Friendship.where(user_id: User.first)
+  #User.first.friends
+  # friend_to_user friend_id -> user_id
+
+# friend add I
+          #撞名，其實就是friendship   #指定用friendship       #告訴friendship要從friend_id去找
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+                                                              #使用user的物件
+  #Friendship.where(firend_id: User.first)
+  #User.first.inverse_friends
 
   has_one :profile
 

@@ -27,14 +27,18 @@ footer{
 }
 
 body {
-  font-family: 'Lobster', cursive;
-  background-color: #000;
+  font-family: 'Poiret One', cursive;
+  background-color: #111;
   color: #777777;
   letter-spacing: 2px;
 }
 
 body h1, h2, h3 {
-  color: orange;
+  color: #F89406;
+}
+
+a {
+  color: #59ABE3;
 }
 
 body p {
@@ -50,12 +54,14 @@ body p {
   position: fixed;
   width: 80px;
   display: block;
-  background-color: #000;
-  border-color: white;
+  background-color: #111;
+  border-color: #ECECEC;
+  border-width: 0.2rem;
+  justify-content: center;
 }
 
 header {
-/*  position: fixed;*/
+color: #ECECEC;
 
 }
 
@@ -83,7 +89,7 @@ header {
 }
 
 .about-text {
-  color: white;
+  color: #ECECEC;
   font-size: 1em;
 }
 

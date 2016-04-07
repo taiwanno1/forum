@@ -23,7 +23,7 @@ Rails.application.routes.draw do
      resources :profiles, :controller => :'user_profiles'
   end
 
-
+  resources :friendships, only: [:create, :destroy]
 
 
   # The priority is based upon order of creation: first created -> highest priority.

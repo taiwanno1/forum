@@ -21,7 +21,7 @@ class Po < ActiveRecord::Base
   end
 
   def find_subscription_by(user)
-    self.subscriptions.find_by_user_id(user.id)
+    user && self.subscriptions.find_by_user_id(user.id)
   end
 
 end
