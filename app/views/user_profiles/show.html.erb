@@ -32,8 +32,6 @@
     <% @user_friendships.each do |f| %>
       <% if Friendship.where("friend_id = ? AND user_id = ?", @user.id, f.friend_id ).exists? %>
 
-        <% f.confirm = true %>
-
         <ul>
           <li>
             <%= User.find(f.friend_id).short_name %>
@@ -73,14 +71,25 @@
 <div class="col-xs-3 col-xs-offset-1">
   <h3>Who Add Me</h3>
   <ul>
-    <% @user_inverse_friends.each do |i| %>
-      <% if @user_friendships.find_by_friend_id(i).confirm != true %>
-      <li><%= i.short_name %> <%= link_to "Confirm", friendships_path(:friend_id => i),method: :post%></li>
-      <% current_user.friendships.find_by_friend_id(i).confirm = true  %>
-      <%= current_user.inverse_friendships.find_by_user_id(i).confirm %>
-      <% else %>
-        <p></p>
+    <% if @user_inverse_friends.exists? %>
+      <% @user_inverse_friends.each do |i| %><!-- 加我的人 -->
+        <% if @user_inverse_friendships.find_by_user_id(i.id).confirm != true %> <!-- if 別人對我的friendship.confirm != true -->
+
+          <li>
+
+            <%= i.short_name %>
+            <%= link_to "Confirm", confirm_friendships_path(:friend_id => i.id),method: :post%>
+            <!-- 將inverse_friendship.confirm設為true並建立
+            我對他的friendship且也設confirm為true
+            inverse_friendship = @user.inverse_friendships且user_id是i的 -->
+
+          </li>
+
+        <% else %>
+        <% end %>
       <% end %>
+    <% else %>
+      <p>沒人加你</p>
     <% end %>
   </ul>
 

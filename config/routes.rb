@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :people
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   resources :users, only: [:show]
@@ -23,7 +24,13 @@ Rails.application.routes.draw do
      resources :profiles, :controller => :'user_profiles'
   end
 
-  resources :friendships, only: [:create, :destroy]
+  resources :friendships, only: [:create, :destroy] do
+    collection do
+      post "confirm"
+    end
+  end
+
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

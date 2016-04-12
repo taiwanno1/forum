@@ -22,4 +22,15 @@ class FriendshipsController < ApplicationController
     redirect_to :back
   end
 
+  def confirm
+    @confirm_friendship = current_user.inverse_friendships.find_by_user_id(params[:friend_id])
+    @confirm_friendship.confirm = true
+    @confirm_friendship.save
+    @friendship = current_user.friendships.create!(:friend_id => params[:friend_id])
+    @friendship.confirm = true
+    @friendship.save
+    flash[:notice] = "friend confirmed"
+    redirect_to :back
+  end
+
 end
