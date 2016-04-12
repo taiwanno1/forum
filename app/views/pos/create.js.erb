@@ -2,7 +2,7 @@
 
 $("#pos-list").prepend("<%=j render( :partial => "po", :locals => { :p => @po }  ) %>");
 $("#new_po").trigger('reset');
-
+$(".select2-selection__rendered").html("");
 <% else %>
 
 alert("新增失敗!!!");

@@ -1,0 +1,2 @@
+$('#pos-list').html("<%= escape_javascript render ( @pos ) %>");
+$('#paginate').html("<%= escape_javascript (paginate(@pos, :remote => true).to_s) %>");

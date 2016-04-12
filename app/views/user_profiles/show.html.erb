@@ -1,35 +1,92 @@
 <!-- ------------------自己的-------------------- -->
-<div id="profile">
-  <h1 class="text-center">Bonjour <%= @user.short_name%>!</h1>
-
-  <% if @profile.pic.exists? %>
-    <%= image_tag(@profile.pic.url(:medium))%>
-  <% else %>
-    you can upload picture
-  <% end %>
-
-  <h3>
-    <% if @profile.about %>
-      About Me:
-      <p class="about-text"><%= @profile.about %></p>
+<div id="profile" class="center-block">
+  <h1 class="text-center"> Bonjour <%= @user.short_name%>!
+    <br/>
+    <% if @profile.pic.exists? %>
+      <%= image_tag(@profile.pic.url(:medium))%>
     <% else %>
-      About Me:
-      <%= form_for [@user, @profile] do |f| %>
-        <div class="form-group">
-          <%= f.text_area :about, :class => "about" %>
-          <%= f.submit 'save', :class => "btn text-left" %>
-        </div>
+      you can upload picture
+    <% end %>
+  </h1>
+
+<div class="row">
+  <div class="col-xs-3 col-xs-offset-3">
+    <h3>
+      <% if @profile.about %>
+        About Me:
+        <p class="about-text"><%= @profile.about %></p>
+      <% else %>
+        About Me:
+        <%= form_for [@user, @profile] do |f| %>
+          <div class="form-group">
+            <%= f.text_area :about, :class => "about" %>
+            <%= f.submit 'save', :class => "btn text-left" %>
+          </div>
+        <% end %>
+      <% end %>
+    </h3>
+  </div>
+<!-- --------------------friend list-------------------- -->
+  <div class="col-xs-3 col-xs-offset-1">
+    <h3>Friends List</h3>
+    <% @user_friendships.each do |f| %>
+      <% if Friendship.where("friend_id = ? AND user_id = ?", @user.id, f.friend_id ).exists? %>
+
+        <% f.confirm = true %>
+
+        <ul>
+          <li>
+            <%= User.find(f.friend_id).short_name %>
+            <%= link_to 'delete', friendship_path(f, :user_id => f.friend_id), method: :delete  %>
+          </li>
+        </ul>
       <% end %>
     <% end %>
-  </h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-3 col-xs-offset-3">
   <h3>我好棒棒了哪些文章：</h3>
-  <% user_like = Po.where(:id => @likes.pluck(:po_id)) %>
+  <% if !@likes.nil? %>
+
+    <% user_like = Po.where(:id => @likes.pluck(:po_id)) %>
+    <ul>
+      <% user_like.each do |u| %>
+        <li><%= u.title %></li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <p>You don't have any like</p>
+  <% end %>
+  </div>
+
+  <!-- <h3>I Add who </h3>
   <ul>
-    <% user_like.each do |u| %>
-      <li><%= u.title %></li>
+    <% @user_friends.each do |f| %>
+      <li><%= f.short_name%> <%= @user.confirm %>
+      <%= link_to 'delete', friendship_path( current_user.friendships.find_by_friend_id(f) ), method: :delete  %></li>
+    <% end %>
+  </ul> -->
+  <!-- --------------------confirm-------------------- -->
+<div class="col-xs-3 col-xs-offset-1">
+  <h3>Who Add Me</h3>
+  <ul>
+    <% @user_inverse_friends.each do |i| %>
+      <% if @user_friendships.find_by_friend_id(i).confirm != true %>
+      <li><%= i.short_name %> <%= link_to "Confirm", friendships_path(:friend_id => i),method: :post%></li>
+      <% current_user.friendships.find_by_friend_id(i).confirm = true  %>
+      <%= current_user.inverse_friendships.find_by_user_id(i).confirm %>
+      <% else %>
+        <p></p>
+      <% end %>
     <% end %>
   </ul>
-  <%= link_to 'Edit Your Profile', edit_user_profile_path(current_user, :id) %>
+
+  </div>
+</div>
+<%= link_to 'Edit Your Profile', edit_user_profile_path(current_user, :id) %>
 </div>
 
 

@@ -14,6 +14,7 @@ class CommentsController < ApplicationController
   def create
     @comment = @po.comments.build(comment_params)
     @comment.user = current_user
+
     if @comment.save
       flash[:notice] = "新增成功"
 

@@ -5,13 +5,9 @@
         <% end %>
       </ul>
 <% end %>
+
 <%=collection_select(:po, :cat_ids, Cat.all, :id, :name,{:prompt=>true},{:class=> "js-example-basic-single select", :multiple => true})%>
-<!-- <div class="form-group" >
 
-  <%#= f.select :cat_ids, Cat.all.map{|x| [x.name, x.id]}, {}, :class => "form-control", :prompt => "Please select" %>
-  <%= f.collection_select :cat_ids, Cat.all, :id, :name, {}, :class => "form-control", :prompt => "Please select" %>
-
-</div> -->
 
 <div class="form-group calander">
   <%= f.label :start_on, "開始日期" %>

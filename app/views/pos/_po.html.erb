@@ -1,14 +1,14 @@
 <tr id="po-<%= p.id %>">
-    <th>
+    <td>
       <%= check_box_tag "ids[]", p.id, false %>
-      <%= link_to p.title, po_comments_path(p), :class => "btn btn-info" %>
-    </th>
-    <th><%= link_to p.user.try(:short_name), user_profiles_path(p.user) %></th>
-    <th><%= p.created_at.strftime('%c') %></th>
-    <th><%= p.updated_at.strftime('%c') %></th>
-    <th><%= p.comments.count %></th>
+      <%= link_to p.title, po_comments_path(p), :class => "btn btn-info" %>`
+    </td>
+    <td><%= link_to p.user.try(:short_name), user_profiles_path(p.user) %></td>
+    <td><%= p.created_at.strftime('%c') %></td>
+    <td><%= p.updated_at.strftime('%c') %></td>
+    <td><%= p.comments.count %></td>
 
-    <th class="clearfix">
+    <td class="clearfix">
       <% if current_user && p.user == current_user %>
 
         <%= link_to "Edit", pos_path( :po_id => p, :page => params[:page]), :class => "btn btn-info" if p.user == current_user %>
@@ -16,5 +16,5 @@
         <%= link_to "Delete", po_path( p,:po_id => p, :page => params[:page]), :method => :delete, :remote => true, :class => "btn btn-danger pull-right" %>
 
       <% end %>
-    </th>
+    </td>
 </tr>

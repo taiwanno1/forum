@@ -26,23 +26,25 @@
         <% end %>
 
         <header>
-          hi <%= current_user.try(:short_name) %>
 
           <%= link_to "Ubike", ubike_path %>|
+          <% if current_user %>
+
+            hi <%= current_user.try(:short_name) %>
+            <%= link_to(t(:logout), destroy_user_session_path, :method => :delete) %> |
+            <%= link_to(t(:change_password), edit_registration_path(:user)) %> |
+            <%= link_to('edit_profile', user_profile_path(current_user, :id)) %>
+          <% else %>
+            <%= link_to('註冊', new_registration_path(:user)) %> |
+            <%= link_to('登入', new_session_path(:user)) %>
+          <% end %>
 
           <% if current_user %>
-              <%= link_to(t(:logout), destroy_user_session_path, :method => :delete) %> |
-              <%= link_to(t(:change_password), edit_registration_path(:user)) %> |
-              <%= link_to('edit_profile', user_profile_path(current_user, :id)) %>
-          <% else %>
-              <%= link_to('註冊', new_registration_path(:user)) %> |
-              <%= link_to('登入', new_session_path(:user)) %>
-          <% end %>
-          <% if current_user %>
             <%= link_to('登出', destroy_user_session_path, :method => :delete, :class => "btn btn-warning btn-xs") %>
-            <% else %>
-                <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-info btn-xs" %>
+          <% else %>
+            <%= link_to "登入 Facebook", user_omniauth_authorize_path(:facebook), :class => "btn btn-info btn-xs" %>
           <% end %>
+
           <br/>
           <%= link_to "中文版", :controller => controller_name, :action => action_name, :locale => "zh-TW" %>
           <%= link_to "English", :controller => controller_name, :action => action_name, :locale => "en" %>
@@ -55,7 +57,11 @@
   </div>
 <script>
 $(document).ready(function () {
-    $(".js-example-basic-single").select2();
+    $(".js-example-basic-single").select2({
+      placeholder: 'this is my placeholder',
+      allowClear: true
+    });
+
   });
 </script>
 </body>

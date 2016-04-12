@@ -15,7 +15,7 @@
     <%= link_to c.name, pos_path(:cat_id => c, :page => params[:page]), :class => "btn btn-default" %>
   <%end%>
 </div>
-<!-- ---------------文章顯示table----------------- -->
+<!-- ---------------文章顯示table thead----------------- -->
 <table class="table table-border" id="table">
 
   <thead class="thead">
@@ -28,12 +28,14 @@
       <th>Comments Count</th>
     </tr>
   </thead>
+<!-- ---------------文章顯示table tbody----------------- -->
   <tbody id="pos-list">
   <!-- 文章 -->
     <% @pos.each do |p| %>
       <%= render :partial => "po", :locals => { :p => p } %>
     <%end%>
   </tbody>
+
 </table>
 <!-- ---------------文章新增＆修改----------------- -->
 <h2>wanna post?</h2>

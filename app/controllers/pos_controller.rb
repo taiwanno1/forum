@@ -10,8 +10,6 @@ class PosController < ApplicationController
       @po = Po.new
     end
 
-    # @comments = Comment.all
-
     prepare_variable_for_index_template
 
   end
@@ -30,8 +28,6 @@ class PosController < ApplicationController
     else
       flash[:notice] = "新增失敗"
     end
-
-
   end
 
   def update
@@ -98,6 +94,7 @@ class PosController < ApplicationController
   def prepare_variable_for_index_template
 
     @pos = Po.all
+    @pos = Po.includes(:comments, :cats).all
     @cats = Cat.all
 
     if params[:cat_id]
@@ -113,6 +110,7 @@ class PosController < ApplicationController
     end
 
     @pos = @pos.page(params[:page]).per(5)
+
   end
 
 end

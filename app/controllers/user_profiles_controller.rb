@@ -10,6 +10,10 @@ class UserProfilesController < ApplicationController
   def show
     @profile = @user.profile
     @likes = @user.likes
+    @user_friends = @user.friends
+    @user_friendships = @user.friendships
+    @user_inverse_friends = @user.inverse_friends
+    @user_inverse_friendships = @user.inverse_friendships
   end
 
   def new

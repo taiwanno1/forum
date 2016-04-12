@@ -1,22 +1,30 @@
 <!-- ------------------別人的-------------------- -->
 <div id="profile">
+  <% if !@profile.nil? %>
+    <h1 class="text-center"><%= @user.try(:short_name) %>'s profile</h1>
 
-  <h1 class="text-center"><%= @user.try(:short_name) %>'s profile</h1>
-
-  <% if @profile.pic.exists? %>
-    <%= image_tag(@profile.pic.url(:medium))%>
-  <% else %>
-  <% end %>
-
-  <h3>About <%= @user.short_name %>:</h3>
-  <p class="about-text"><%= @profile.about %></p>
-
-  <h3><%= @user.short_name %> 好棒棒了哪些文章：</h3>
-  <% user_like = Po.where(:id => @likes.pluck(:po_id)) %>
-  <ul>
-    <% user_like.each do |u| %>
-      <li><%= u.title %></li>
+    <% if current_user && @user != current_user && !current_user.friends.exists?(@user)%>
+      <%= link_to 'Add Friend', friendships_path(:friend_id => @user),method: :post %>
     <% end %>
-  </ul>
+    <br/>
 
+    <% if @profile.pic.exists? %>
+      <%= image_tag(@profile.pic.url(:medium))%>
+      <% else %>
+    <% end %>
+
+    <h3>About <%= @user.short_name %>:</h3>
+    <p class="about-text"><%= @profile.about %></p>
+
+    <h3><%= @user.short_name %> 好棒棒了哪些文章：</h3>
+    <% user_like = Po.where(:id => @likes.pluck(:po_id)) %>
+    <ul>
+      <% user_like.each do |u| %>
+        <li><%= u.title %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <h3><%= @user.short_name %> doesn't has a profile</h3>
+  <% end %>
 </div>
+
